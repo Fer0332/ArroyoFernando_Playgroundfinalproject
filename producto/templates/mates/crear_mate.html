@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block header %}
+<h1>Crear Mate</h1>
+{% endblock header %}
+
+{% block main %}
+<form action={% url "crear_mates" %} method="POST">
+        {% csrf_token %}
+        <table>
+            {{form}}
+        </table>
+        <input type="submit" value="crear Mate">
+ </form>
+{% endblock main %}
