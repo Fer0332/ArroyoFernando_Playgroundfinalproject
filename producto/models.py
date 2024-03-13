@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 class Mate(models.Model): 
     marca = models.CharField(max_length=20)
