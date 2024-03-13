@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block header %}
+<h1>Cargar tipo de termo</h1>
+{% endblock header %}
+    {% block main %}
+    
+    <form action={% url "crear_termo" %} method="POST">
+        {% csrf_token %}
+        <table>
+            {{formulario}}
+        </table>
+        <input type="submit" value="crear termo">
+    </form>
+    {% endblock main %}

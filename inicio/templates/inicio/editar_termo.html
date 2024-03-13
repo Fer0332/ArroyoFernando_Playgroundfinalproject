@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block header %}
+<h1>Editar Termo {{termo.id}} </h1>
+{% endblock header %}
+    {% block main %}
+    <form action="{% url 'editar_termo' termo.id %}" method="POST">
+
+    {% comment %} <form action="{% url "editar_termo" termo.id %}" method="POST">  {% endcomment %}
+        {% csrf_token %}
+        <table>
+            {{formulario}}
+        </table>
+        <input type="submit" value="Editar termo">
+    </form>
+    {% endblock main %}

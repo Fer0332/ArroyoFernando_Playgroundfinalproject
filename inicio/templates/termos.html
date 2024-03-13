@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block h1_header %}
+Listado de Termos
+{% endblock h1_header %}
+{% block main %}
+<a href={% url "crear_termo" %}>Cargar termo</a>
+<form action="{% url "termos" %}">
+    {{formulario}}
+    <input type="submit" value="Buscar">
+</form>
+{% if termos %}
+<ul> 
+     {% for termo in termos %}
+     
+    <li>Marca: {{ termo.marca }} |
+         <a href="{% url 'ver_termo' termo.id %}">Ver</a> 
+         |<a href="{% url 'eliminar_termo' termo.id %}">Eliminar</a>
+         |<a href="{% url 'editar_termo' termo.id %}">Editar</a>
+         |, Capacidad: {{ termo.capacidad }}, Color: {{ termo.color }}, Línea: {{ termo.linea }}</li>
+    {% comment %} <li>Marca: {{ termo.marca }} |<a href={% url "ver_termo"  termo.marca.id %}>Ver</a>|, Capacidad: {{ termo.capacidad }}, Color: {{ termo.color }}, Línea: {{ termo.linea }}</li> {% endcomment %}
+    {% endfor %}
+    
+</ul>
+{% else %}
+<p>
+    No se encontraron Marca de termo con ese nombre
+</p>
+{% endif %}
+
+{% endblock main %}
+        
+        

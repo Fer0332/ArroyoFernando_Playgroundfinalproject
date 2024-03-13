@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.template import Template, Context, loader   
 from inicio.models import termo
-from inicio.forms import FormularioCreacionTermo
+from inicio.forms import FormularioCreacionTermo, FormularioBusquedaTermo, FormularioEdicionTermo
 
 def inicio(request):
     #V1
@@ -34,11 +34,17 @@ def inicio(request):
     # return HttpResponse(template_renderizado)
 
     #V3
+    # return render(request, "inicio.html")
     return render(request, "inicio.html")
 
 def termos(request):
+    formulario= FormularioBusquedaTermo(request.GET)
+    if formulario.is_valid():
+        info_busqueda = formulario.cleaned_data.get("marca")
+        termos = termo.objects.filter(marca__icontains= info_busqueda)
+        
     termos = termo.objects.all()
-    return render(request, "termos.html",{"termos": termos})
+    return render(request, "termos.html",{"termos": termos,"formulario": formulario})
 
 def mostrar_horario(request):
     fecha= datetime.now()
@@ -81,4 +87,33 @@ def crear_termo(request):
             Termo.save()
             return redirect("termos")   
     return render(request, "crear_termo.html", {"formulario": formulario})
-    # return render(request, "crear_termo.html", {})
+    # return render(request, "crear_termo.html", {})inicio/templates/inicio
+    
+def eliminar_termo(request, id_termo):
+    termo_obj = termo.objects.get(id= id_termo)
+    termo_obj.delete()
+    return redirect("termos")
+    
+    
+def editar_termo(request,id_termo):
+    termo_obj = termo.objects.get(id= id_termo)
+    formulario = FormularioEdicionTermo(initial={"marca":termo_obj.marca,"capacidad": termo_obj.capacidad ,"color":termo_obj.color,"linea":termo_obj.linea})
+    if request.method == "POST":
+        formulario = FormularioEdicionTermo(request.POST)
+        if formulario.is_valid():
+            info_nueva = formulario.cleaned_data
+            
+            termo_obj.marca = info_nueva.get("marca")
+            termo_obj.capacidad = info_nueva.get("capacidad")
+            termo_obj.color = info_nueva.get("color")
+            termo_obj.linea = info_nueva.get("linea")
+            
+            termo_obj.save()
+            
+            return redirect("termos")
+        
+    return render(request,"inicio/editar_termo.html",{"termo": termo_obj, "formulario": formulario} )
+
+def ver_termo(request, id_termo):
+    termo_obj = termo.objects.get(id= id_termo)
+    return render(request, "inicio/ver_termo.html",{"termo": termo_obj})

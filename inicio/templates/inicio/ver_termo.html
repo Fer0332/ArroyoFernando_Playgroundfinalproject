@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block h1_header %}
+Datos del Termo {{termo.id}}
+{% endblock h1_header %}
+{% block main %}
+<ul>
+    <li>Marca: {{ termo.marca }} </li>
+    <li>Capacidad: {{ termo.capacidad }} </li>
+    <li>Color: {{ termo.color }} </li>
+    <li>Línea: {{ termo.linea }} </li>
+</ul>
+{% endblock main %}
+        
