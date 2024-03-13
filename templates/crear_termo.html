@@ -16,11 +16,38 @@
         <nav>
             <a href={% url "inicio" %}>Inicio</a>
             <a href={% url "termos" %}>Listado Termos</a>
-            <a href={% url "crear_termo" %}>Cargar Termo</a>
-            
         </nav>
-        <h1>Hola Esta es mi primer pagina web!</h1>
-        
+        {% comment %} <h1> Se creo la carga del termo {{termo}} correctamente..</h1> {% endcomment %}
+        <h1>Cargar tipo de termo</h1>
+
+        <form action={% url "crear_termo" %} method="POST">
+            {% csrf_token %}
+
+            {% comment %} v1 {% endcomment %}
+            {% comment %} <p>
+                Marca
+                <input type="text" name="marca">
+            </p>
+            <p>
+                Capacidad
+                <input type="number" name="capacidad">
+            </p>
+            <p>
+                Color
+                <input type="text" name="color">
+            </p>
+            <p>
+                Linea
+                <input type="text" name="linea">
+            </p> {% endcomment %}
+            <table>
+                {{formulario}}
+            </table>
+
+            <input type="submit" value="crear termo">
+        </form>
+
+    
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
