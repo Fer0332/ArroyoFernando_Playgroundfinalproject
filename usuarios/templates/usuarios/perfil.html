@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block h1_header %}Perfil de {{request.user}}
+{% endblock h1_header %}
+{% block main %}
+<ul>
+    <li>Nombre: {{request.user.first_name}}</li>
+    <li>Apellido: {{request.user.last_name}}</li>
+    <li>email: {{request.user.email}}</li>
+    <li>Avatar: 
+        {% if request.user.datosextras.avatar %}
+            <img src="{{ request.user.datosextras.avatar.url }}" alt="Avatar" height="40px">
+        {% else %}
+            <img src="{% static 'assets/img/defaultavatar.jpg' %}" alt="Avatar" height="40px">
+        {% endif %}
+    </li>
+    
+    
+    {% comment %} <img src="{{ request.user.datosextras.avatar.url }}" alt="Avatar" height="90px"> {% endcomment %}
+
+
+    
+</ul>
+<a class="btn btn-primary" href={% url "editar_perfil" %}>Editar perfil</a>
+<a class="btn btn-secondary" href={% url "cambiar_contrasenia" %}>Cambiar contraseña</a>
+{% endblock main %}
+        

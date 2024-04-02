@@ -13,10 +13,10 @@ Listado de Mates
      {% for mate in mates %}
      
     <li>{{mate}} |
-         {% comment %} <a href="{% url 'ver_mate' mate.id %}">Ver</a> 
-         |<a href="{% url 'eliminar_mate' mate.id %}">Eliminar</a>
-         |<a href="{% url 'editar_mate' mate.id %}">Editar</a>
-         |, Capacidad: {{ mate.capacidad }}, Color: {{ mate.color }}, Línea: {{ mate.linea }} {% endcomment %}
+         <a href="{% url 'detalle_mate' mate.id %}">Detalle</a> 
+         |<a href="{% url 'eliminar_mates' mate.id %}">Eliminar</a>
+         |<a href="{% url 'editar_mates' mate.id %}">Editar</a>
+         |, Capacidad: {{ mate.capacidad }}, Color: {{ mate.color }}, Línea: {{ mate.linea }} 
     </li>
     {% endfor %}
     

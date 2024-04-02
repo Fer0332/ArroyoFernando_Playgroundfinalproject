@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block header %}
+<h1>Eliminar Mate</h1>
+{% endblock header %}
+
+{% block main %}
+<form action={% url "eliminar_mates" mate.id %} method="POST">
+        {% csrf_token %}
+        <p>Desea borrar el producto seleccionado?  {{mate}}</p>
+        <input type="submit" value="Confirmar">
+ </form>
+{% endblock main %}

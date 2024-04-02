@@ -5,25 +5,10 @@ from django.http import HttpResponse
 from django.template import Template, Context, loader   
 from inicio.models import termo
 from inicio.forms import FormularioCreacionTermo, FormularioBusquedaTermo, FormularioEdicionTermo
+from django.contrib.auth.decorators import login_required
 
 def inicio(request):
-    #V1
-    # archivo_abierto= open(r"C:\Users\foarr\OneDrive\Documentos\phyton\ejercicio 2\templates\inicio.html", "r")
-    # template= Template(archivo_abierto.read())
-    # archivo_abierto.close()
-    
-    # contexto = Context()
-    # template_renderizado = template.render(contexto)
-    
-    # return HttpResponse(template_renderizado)
 
-    # V2
-    # template = loader.get_template("inicio.html")
-    # archivo_abierto= open(r"C:\Users\foarr\OneDrive\Documentos\phyton\ejercicio 2\templates\inicio.html", "r")
-    # template= Template(archivo_abierto.read())
-    # archivo_abierto.close()////// me ahorro todo lo que esta antes con el loader
-    
-    # contexto = Context() ya no es necesario usar el contexto
     
     dicc = {
         "nombre": "Fernando"
@@ -89,12 +74,13 @@ def crear_termo(request):
     return render(request, "crear_termo.html", {"formulario": formulario})
     # return render(request, "crear_termo.html", {})inicio/templates/inicio
     
+@login_required
 def eliminar_termo(request, id_termo):
     termo_obj = termo.objects.get(id= id_termo)
     termo_obj.delete()
     return redirect("termos")
     
-    
+@login_required   
 def editar_termo(request,id_termo):
     termo_obj = termo.objects.get(id= id_termo)
     formulario = FormularioEdicionTermo(initial={"marca":termo_obj.marca,"capacidad": termo_obj.capacidad ,"color":termo_obj.color,"linea":termo_obj.linea})

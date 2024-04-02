@@ -1,0 +1,78 @@
+{% block header %}
+<h1>Editar Perfil</h1>
+{% endblock header %}
+
+{% block main %}
+<form action="{% url 'editar_perfil' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{ formulario.as_table }}
+    </table>
+    <input type="submit" value="Editar">
+</form>
+{% endblock main %} 
+
+
+
+{% comment %} {% extends "base.html" %}
+{% block header %}
+<h1>Editar Perfil</h1>
+{% endblock header %}
+
+{% block main %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <form action={% url "editar_perfil" %} method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_first_name" class="form-label">Nombre</label>
+                    {{ formulario.first_name }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_last_name" class="form-label">Apellido</label>
+                    {{ formulario.last_name }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_email" class="form-label">Correo Electrónico</label>
+                    {{ formulario.email }}
+                </div>
+                <button type="submit" class="btn btn-primary">Editar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main %}
+ {% endcomment %}
+
+
+{% comment %} {% block header %}
+<h1>Editar Perfil</h1>
+{% endblock header %}
+
+{% block main %}
+<form action="{% url 'editar_perfil' %}" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ formulario.as_table }}
+    </table>
+    <input type="submit" value="Editar">
+</form>
+{% endblock main %} {% endcomment %}
+
+
+{% comment %} 
+{% extends "base.html" %}
+{% block header %}
+<h1>Editar Perfil</h1>
+{% endblock header %}
+
+{% block main %}
+<form action={% url "editar_perfil" %} method="POST">
+        {% csrf_token %}
+        <table>
+            {{formulario}}
+        </table>
+        <input type="submit" value="Editar">
+ </form>
+{% endblock main %} {% endcomment %}

@@ -1,0 +1,35 @@
+{% block header %}
+<h1>Cambiar contraseña</h1>
+{% endblock header %}
+
+{% block main %}
+<form action="{% url 'cambiar_contrasenia' %}" method="POST">
+    {% csrf_token %}
+    <table>
+        {% for field in form %}
+            {% if field.name != 'password1' and field.name != 'password2' %}
+                <tr>
+                    <td>{{ field.label_tag }}</td>
+                    <td>{{ field }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    <input type="submit" class="btn btn-primary" value="Cambiar">
+</form>
+{% endblock main %}
+
+{% comment %} {% block header %}
+<h1>Cambiar contraseña</h1>
+{% endblock header %}
+
+{% block main %}
+<form action="{% url 'cambiar_contrasenia' %}" method="POST">
+    {% csrf_token %}
+    <table>
+        {{form}}
+    </table>
+    <input type="submit" class="btn btn-primary" value="Cambiar">
+</form>
+{% endblock main %} 
+ {% endcomment %}
